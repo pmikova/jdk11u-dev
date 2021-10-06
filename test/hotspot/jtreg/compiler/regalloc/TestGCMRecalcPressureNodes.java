@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, 2018, Red Hat, Inc. All rights reserved.
+ * Copyright (C) 2021 THL A29 Limited, a Tencent company. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -19,20 +19,35 @@
  * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
  * or visit www.oracle.com if you need additional information or have any
  * questions.
+ *
  */
 
 /**
- * @test TestLogTrace
- * @key gc
- * @requires vm.gc.Epsilon & !vm.graal.enabled
- * @summary Test that tracing does not crash Epsilon
- * @run main/othervm -Xmx256m -Xlog:gc*=trace
- *                   -XX:+UnlockExperimentalVMOptions -XX:+UseEpsilonGC
- *                   TestLogTrace
+ * @test
+ * @bug 8272570
+ * @summary crash in PhaseCFG::global_code_motion
+ * @requires vm.compiler2.enabled
+ *
+ * @run main/othervm -Xbatch TestGCMRecalcPressureNodes
  */
 
-public class TestLogTrace {
-  public static void main(String[] args) throws Exception {
-    System.out.println("Hello World");
-  }
+public class TestGCMRecalcPressureNodes {
+    public boolean bo0;
+    public boolean bo1;
+    public void foo() {
+        int sh12 = 61;
+        for (int i = 0; i < 50; i++) {
+            sh12 *= 34;
+        }
+        Math.tan(1.0);
+        bo0 = true;
+        bo1 = true;
+    }
+    public static void main(String[] args) {
+        TestGCMRecalcPressureNodes instance = new TestGCMRecalcPressureNodes();
+        for (int i = 0; i < 50000; i++) {
+            instance.foo();
+        }
+    }
 }
+
