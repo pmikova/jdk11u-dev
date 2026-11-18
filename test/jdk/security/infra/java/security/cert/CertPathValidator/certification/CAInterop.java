@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, 2025, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023, 2026, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -170,16 +170,6 @@
  * @build jtreg.SkippedException ValidatePathWithURL CAInterop
  * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop entrustrootcaec1 OCSP
  * @run main/othervm/manual -Djava.security.debug=certpath CAInterop entrustrootcaec1 CRL
- */
-
-/*
- * @test id=entrustrootcag4
- * @bug 8243321
- * @summary Interoperability tests with Entrust CAs
- * @library /test/lib
- * @build jtreg.SkippedException ValidatePathWithURL CAInterop
- * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop entrustrootcag4 OCSP
- * @run main/othervm/manual -Djava.security.debug=certpath CAInterop entrustrootcag4 CRL
  */
 
 /*
@@ -388,26 +378,6 @@
  */
 
 /*
- * @test id=emsignrootcag1
- * @bug 8319187
- * @summary Interoperability tests with eMudhra Root CA G1
- * @library /test/lib
- * @build jtreg.SkippedException ValidatePathWithURL CAInterop
- * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop emsignrootcag1 OCSP
- * @run main/othervm/manual -Djava.security.debug=certpath CAInterop emsignrootcag1 CRL
- */
-
-/*
- * @test id=emsigneccrootcag3
- * @bug 8319187
- * @summary Interoperability tests with eMudhra ECC Root CA G3
- * @library /test/lib
- * @build jtreg.SkippedException ValidatePathWithURL CAInterop
- * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop emsigneccrootcag3 OCSP
- * @run main/othervm/manual -Djava.security.debug=certpath CAInterop emsigneccrootcag3 CRL
- */
-
-/*
  * @test id=certainlyrootr1
  * @bug 8321408
  * @summary Interoperability tests with Certainly Root R1
@@ -452,7 +422,7 @@
  * @library /test/lib
  * @build jtreg.SkippedException ValidatePathWithURL CAInterop
  * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop ssltlsrootecc2022 DEFAULT
- * @run main/othervm/manual -Djava.security.debug=certpath,ocsp -Dcom.sun.security.ocsp.useget=false CAInterop ssltlsrootecc2022 DEFAULT
+ * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop ssltlsrootecc2022 DEFAULT
  * @run main/othervm/manual -Djava.security.debug=certpath CAInterop ssltlsrootecc2022 CRL
  */
 
@@ -463,7 +433,7 @@
  * @library /test/lib
  * @build jtreg.SkippedException ValidatePathWithURL CAInterop
  * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop ssltlsrootrsa2022 DEFAULT
- * @run main/othervm/manual -Djava.security.debug=certpath,ocsp -Dcom.sun.security.ocsp.useget=false CAInterop ssltlsrootrsa2022 DEFAULT
+ * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop ssltlsrootrsa2022 DEFAULT
  * @run main/othervm/manual -Djava.security.debug=certpath CAInterop ssltlsrootrsa2022 CRL
  */
 
@@ -477,7 +447,7 @@
  * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop
  * sectigotlsrootr46 OCSP
  * @run main/othervm/manual -Djava.security.debug=certpath,ocsp
- * -Dcom.sun.security.ocsp.useget=false CAInterop sectigotlsrootr46 OCSP
+ * CAInterop sectigotlsrootr46 OCSP
  * @run main/othervm/manual -Djava.security.debug=certpath CAInterop
  * sectigotlsrootr46 CRL
  */
@@ -492,9 +462,37 @@
  * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop
  * sectigotlsroote46 OCSP
  * @run main/othervm/manual -Djava.security.debug=certpath,ocsp
- * -Dcom.sun.security.ocsp.useget=false CAInterop sectigotlsroote46 OCSP
+ * CAInterop sectigotlsroote46 OCSP
  * @run main/othervm/manual -Djava.security.debug=certpath CAInterop
  * sectigotlsroote46 CRL
+ */
+
+/*
+ * @test id=wisekeyglobalrootgbca
+ * @bug 8372351
+ * @summary Interoperability tests with OISTE WISeKey Global Root GB CA
+ * @library /test/lib
+ * @build jtreg.SkippedException ValidatePathWithURL CAInterop
+ * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop
+ * wisekeyglobalrootgbca OCSP
+ * @run main/othervm/manual -Djava.security.debug=certpath,ocsp
+ * CAInterop wisekeyglobalrootgbca OCSP
+ * @run main/othervm/manual -Djava.security.debug=certpath CAInterop
+ * wisekeyglobalrootgbca CRL
+ */
+
+/*
+ * @test id=wisekeyglobalrootgcca
+ * @bug 8372351
+ * @summary Interoperability tests with OISTE WISeKey Global Root GC CA
+ * @library /test/lib
+ * @build jtreg.SkippedException ValidatePathWithURL CAInterop
+ * @run main/othervm/manual -Djava.security.debug=certpath,ocsp CAInterop
+ * wisekeyglobalrootgcca OCSP
+ * @run main/othervm/manual -Djava.security.debug=certpath,ocsp
+ * CAInterop wisekeyglobalrootgcca OCSP
+ * @run main/othervm/manual -Djava.security.debug=certpath CAInterop
+ * wisekeyglobalrootgcca CRL
  */
 
 /**
@@ -533,8 +531,8 @@ public class CAInterop {
                     return new CATestURLs("https://valid.business.ca22.ssl.buypass.no",
                     "https://revoked.business.ca22.ssl.buypass.no");
             case "buypassclass3ca":
-                    return new CATestURLs("https://valid.qcevident.ca23.ssl.buypass.no",
-                    "https://revoked.qcevident.ca23.ssl.buypass.no");
+                    return new CATestURLs("https://valid.evident.ca23.ssl.buypass.no",
+                    "https://revoked.evident.ca23.ssl.buypass.no");
 
             case "comodorsaca":
                     return new CATestURLs("https://comodorsacertificationauthority-ev.comodoca.com",
@@ -563,9 +561,6 @@ public class CAInterop {
             case "entrustrootcaec1":
                     return new CATestURLs("https://validec.entrust.net",
                             "https://revokedec.entrust.net");
-            case "entrustrootcag4":
-                    return new CATestURLs("https://validg4.entrust.net",
-                            "https://revokedg4.entrust.net");
 
             case "godaddyrootg2ca":
                     return new CATestURLs("https://valid.gdig2.catest.godaddy.com",
@@ -640,13 +635,6 @@ public class CAInterop {
                     return new CATestURLs("https://juolukka.cover.telia.fi:10600",
                             "https://juolukka.cover.telia.fi:10601");
 
-            case "emsignrootcag1":
-                    return new CATestURLs("https://testovg1.emsign.com/RootOVG1.html",
-                            "https://testovg1r.emsign.com/RootOVG1MR.html");
-            case "emsigneccrootcag3":
-                    return new CATestURLs("https://testovg3.emsign.com/RootOVG3.html",
-                            "https://testovg3r.emsign.com/RootOVG3MR.html");
-
             case "certainlyrootr1":
                     return new CATestURLs("https://valid.root-r1.certainly.com",
                             "https://revoked.root-r1.certainly.com");
@@ -674,6 +662,13 @@ public class CAInterop {
             case "sectigotlsroote46":
                     return new CATestURLs("https://sectigopublicserverauthenticationroote46-ev.sectigo.com",
                             "https://sectigopublicserverauthenticationroote46-ev.sectigo.com:444");
+
+            case "wisekeyglobalrootgbca":
+                    return new CATestURLs("https://gbvalidssl.hightrusted.com",
+                            "https://gbrevokedssl.hightrusted.com");
+            case "wisekeyglobalrootgcca":
+                    return new CATestURLs("https://gcvalidssl.hightrusted.com",
+                            "https://gcrevokedssl.hightrusted.com");
 
             default: throw new RuntimeException("No test setup found for: " + alias);
         }
